@@ -105,8 +105,9 @@ export default function ProjectModal({
                     ref={videoRef}
                     src={project.demoVideo}
                     controls
-                    controlsList="nodownload novolume nofullscreen"
+                    controlsList="nodownload novolume nofullscreen noremoteplayback"
                     disablePictureInPicture
+                    disableRemotePlayback
                     muted
                     autoPlay
                     playsInline
@@ -282,7 +283,9 @@ export default function ProjectModal({
               <video
                 src={project.demoVideo}
                 controls
-                controlsList="nodownload novolume"
+                controlsList="nodownload novolume nofullscreen noremoteplayback"
+                disablePictureInPicture
+                disableRemotePlayback
                 autoPlay
                 muted
                 playsInline

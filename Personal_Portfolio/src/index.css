@@ -27,6 +27,14 @@ html.dark {
   background-color: #0b0f17;
 }
 
+/* Disable all transitions for a moment while switching theme (prevents mobile lag).
+   The theme toggle switch itself keeps its own animation. */
+html.theme-switching *:not(.squish-switch-root):not(.squish-switch-root *),
+html.theme-switching *:not(.squish-switch-root):not(.squish-switch-root *)::before,
+html.theme-switching *:not(.squish-switch-root):not(.squish-switch-root *)::after {
+  transition: none !important;
+}
+
 body {
   margin: 0;
   min-width: 320px;

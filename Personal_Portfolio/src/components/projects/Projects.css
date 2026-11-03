@@ -1025,7 +1025,9 @@
 .project-theater-video::-webkit-media-controls-volume-control-container,
 .project-theater-video::-webkit-media-controls-mute-button,
 .project-theater-video::-webkit-media-controls-volume-slider,
-.project-theater-video::-webkit-media-controls-volume-slider-container {
+.project-theater-video::-webkit-media-controls-volume-slider-container,
+.project-theater-video::-webkit-media-controls-fullscreen-button,
+.project-theater-video::-webkit-media-controls-toggle-closed-captions-button {
   display: none !important;
   visibility: hidden !important;
   opacity: 0 !important;
@@ -1462,11 +1464,56 @@
     font-size: 1.2rem;
   }
 
+  /* Keep Video Demo & Source Code side by side */
   .project-modal-links {
-    flex-direction: column;
+    flex-direction: row;
+    gap: 8px;
   }
 
   .project-modal-btn {
-    width: 100%;
+    width: auto;
+    min-width: 0;
+    padding: 9px 10px;
+    font-size: 0.8rem;
+    gap: 6px;
+    white-space: nowrap;
+  }
+
+  /* Smaller close (X) so it doesn't collide with the video Expand button */
+  .project-modal-close {
+    top: 8px;
+    right: 8px;
+    width: 28px;
+    height: 28px;
+  }
+
+  .project-modal-close svg {
+    width: 15px;
+    height: 15px;
+  }
+
+  /* Push preview down so the X sits above the video, not on top of Expand */
+  .project-modal-left {
+    padding: 2.6rem 1rem 1rem;
+  }
+
+  .project-modal-expand-btn {
+    top: 8px;
+    right: 8px;
+    padding: 5px 10px;
+    font-size: 0.72rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .project-modal-btn {
+    padding: 8px 6px;
+    font-size: 0.74rem;
+    gap: 4px;
+  }
+
+  .project-modal-btn svg {
+    width: 14px;
+    height: 14px;
   }
 }
