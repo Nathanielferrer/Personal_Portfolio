@@ -102,6 +102,31 @@ export default function Contact() {
     }
 
     setFieldErrors({ name: '', email: '', subject: '', message: '' });
+
+    // Honeypot check: silently succeed if hidden bot field is filled
+    if (formData._gotcha) {
+      setStatus({
+        submitting: false,
+        success: true,
+        message: 'Thank you! Your message has been sent successfully.'
+      });
+      setFormData({ name: '', email: '', subject: '', message: '', _gotcha: '' });
+      return;
+    }
+
+    // Rate-limit check: 45-second cooldown per browser to prevent spam
+    const lastSent = Number(localStorage.getItem('portfolio_last_contact_ts') || 0);
+    const now = Date.now();
+    if (now - lastSent < 45000) {
+      const waitSec = Math.ceil((45000 - (now - lastSent)) / 1000);
+      setStatus({
+        submitting: false,
+        success: false,
+        message: `Please wait ${waitSec}s before sending another message.`
+      });
+      return;
+    }
+
     setStatus({ submitting: true, success: null, message: '' });
 
     try {
@@ -110,63 +135,105 @@ export default function Contact() {
       const trimmedSubject = formData.subject.trim();
       const trimmedMessage = formData.message.trim();
 
-      // Include form submission time-trap for backend bot detection
-      const payload = {
-        ...formData,
-        name: trimmedName,
-        email: trimmedEmail,
-        subject: trimmedSubject,
-        message: trimmedMessage,
-        _time: mountedAt
-      };
-
-      // Endpoints to try in order (Vercel Serverless, Vite dev proxy, direct XAMPP Apache, or subfolder)
-      const endpoints = [
-        '/api/contact',
-        '/api/contact.php',
-        'http://localhost/Portfolio/api/contact.php',
-        '/Portfolio/api/contact.php'
-      ];
+      const web3FormsKey =
+        import.meta.env.VITE_WEB3FORMS_KEY || '29518050-fce3-4cdf-8b0c-3da04509c3b9';
 
       let data = null;
       let lastErrorMessage = '';
 
-      for (const endpoint of endpoints) {
-        try {
-          const res = await fetch(endpoint, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'Accept': 'application/json'
-            },
-            body: JSON.stringify(payload)
-          });
+      // 1. Primary: Web3Forms API (works reliably on Vercel & localhost)
+      try {
+        const web3Res = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify({
+            access_key: web3FormsKey,
+            name: trimmedName,
+            email: trimmedEmail,
+            subject: trimmedSubject
+              ? `New Contact Message: ${trimmedSubject}`
+              : 'New Portfolio Inquiry',
+            from_name: `${trimmedName} (via Portfolio)`,
+            replyto: trimmedEmail,
+            message: trimmedMessage,
+            botcheck: ''
+          })
+        });
 
-          const rawText = await res.text();
+        const web3Json = await web3Res.json();
+        if (web3Json && web3Json.success) {
+          data = {
+            success: true,
+            message: `Thank you, ${trimmedName}! Your message has been sent successfully.`
+          };
+        } else if (web3Json && web3Json.message) {
+          lastErrorMessage = web3Json.message;
+        }
+      } catch (web3Err) {
+        lastErrorMessage = web3Err.message;
+      }
 
-          // If static server served raw unexecuted PHP code, skip to next endpoint
-          if (rawText.trim().startsWith('<?php')) {
-            continue;
-          }
+      // 2. Fallback: Serverless / local PHP endpoints if Web3Forms was unreachable
+      if (!data) {
+        const payload = {
+          ...formData,
+          name: trimmedName,
+          email: trimmedEmail,
+          subject: trimmedSubject,
+          message: trimmedMessage,
+          _time: mountedAt
+        };
 
+        const endpoints = [
+          '/api/contact',
+          '/api/contact.php',
+          'http://localhost/Portfolio/api/contact.php',
+          '/Portfolio/api/contact.php'
+        ];
+
+        for (const endpoint of endpoints) {
           try {
-            data = JSON.parse(rawText);
-            if (data && typeof data === 'object') {
-              break; // Found working PHP endpoint that returned valid JSON
+            const res = await fetch(endpoint, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+              },
+              body: JSON.stringify(payload)
+            });
+
+            const rawText = await res.text();
+
+            if (rawText.trim().startsWith('<?php')) {
+              continue;
             }
-          } catch {
-            lastErrorMessage = `Server returned invalid JSON.`;
+
+            try {
+              const parsed = JSON.parse(rawText);
+              if (parsed && typeof parsed === 'object' && parsed.success) {
+                data = parsed;
+                break;
+              } else if (parsed && parsed.message) {
+                lastErrorMessage = parsed.message;
+              }
+            } catch {
+              // ignore non-JSON fallback error
+            }
+          } catch (fetchErr) {
+            lastErrorMessage = lastErrorMessage || fetchErr.message;
           }
-        } catch (fetchErr) {
-          lastErrorMessage = fetchErr.message;
         }
       }
 
       if (!data) {
-        throw new Error(lastErrorMessage || 'All contact endpoints failed to respond.');
+        throw new Error(lastErrorMessage || 'Failed to send message. Please try again later.');
       }
 
       if (data.success) {
+        localStorage.setItem('portfolio_last_contact_ts', String(Date.now()));
         setStatus({
           submitting: false,
           success: true,
@@ -185,8 +252,7 @@ export default function Contact() {
       setStatus({
         submitting: false,
         success: false,
-        message:
-          'Could not connect to PHP backend. Please ensure Apache is running in XAMPP on port 80.'
+        message: err.message || 'Failed to send message. Please check your connection and try again.'
       });
     }
   };

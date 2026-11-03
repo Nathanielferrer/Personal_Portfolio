@@ -50,7 +50,8 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 1.1rem 1.3rem;
+  padding: clamp(0.6rem, calc(var(--bounce-cards-size, 175px) * 0.085), 1.1rem)
+           clamp(0.7rem, calc(var(--bounce-cards-size, 175px) * 0.095), 1.3rem);
   box-sizing: border-box;
   text-align: left;
   user-select: none;
@@ -59,9 +60,9 @@
 
 .bounce-cards__trait-label {
   font-family: 'Advent Pro', system-ui, sans-serif;
-  font-size: 0.75rem;
+  font-size: clamp(0.58rem, calc(var(--bounce-cards-size, 175px) * 0.056), 0.75rem);
   font-weight: 700;
-  letter-spacing: 2.2px;
+  letter-spacing: clamp(1.4px, calc(var(--bounce-cards-size, 175px) * 0.012), 2.2px);
   text-transform: uppercase;
   color: #94a3b8;
   display: block;
@@ -69,12 +70,12 @@
 
 .bounce-cards__trait-title {
   font-family: 'ADLaM Display', system-ui, sans-serif;
-  font-size: 1.15rem;
+  font-size: clamp(0.76rem, calc(var(--bounce-cards-size, 175px) * 0.088), 1.15rem);
   font-weight: 600;
   color: #ffffff;
   margin: 0;
-  letter-spacing: 0.4px;
-  line-height: 1.25;
+  letter-spacing: 0.3px;
+  line-height: 1.2;
 }
 
 /* Light Mode Overrides */
