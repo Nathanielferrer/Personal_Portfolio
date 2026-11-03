@@ -1,5 +1,12 @@
 import nodemailer from 'nodemailer';
 
+const esc = (v) =>
+  String(v)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+
 export default async function handler(req, res) {
   // CORS & Preflight handling
   res.setHeader('Access-Control-Allow-Credentials', true);
@@ -71,7 +78,7 @@ export default async function handler(req, res) {
 
     // 6. Dispatch Email with Reply-To header
     await transporter.sendMail({
-      from: `"${trimmedName} (via Portfolio)" <${smtpUser}>`,
+      from: `"${trimmedName.replace(/["\r\n<>]/g, '')} (via Portfolio)" <${smtpUser}>`,
       to: recipientEmail,
       replyTo: trimmedEmail,
       subject: `New Contact Message: ${trimmedSubject}`,
@@ -85,20 +92,20 @@ export default async function handler(req, res) {
           <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px;">
             <tr>
               <td style="padding: 8px 0; color: #64748b; font-size: 14px; width: 100px;"><strong>From:</strong></td>
-              <td style="padding: 8px 0; color: #0f172a; font-size: 14px;">${trimmedName}</td>
+              <td style="padding: 8px 0; color: #0f172a; font-size: 14px;">${esc(trimmedName)}</td>
             </tr>
             <tr>
               <td style="padding: 8px 0; color: #64748b; font-size: 14px;"><strong>Email:</strong></td>
-              <td style="padding: 8px 0; color: #0f172a; font-size: 14px;"><a href="mailto:${trimmedEmail}" style="color: #0284c7; text-decoration: none;">${trimmedEmail}</a></td>
+              <td style="padding: 8px 0; color: #0f172a; font-size: 14px;"><a href="mailto:${esc(trimmedEmail)}" style="color: #0284c7; text-decoration: none;">${esc(trimmedEmail)}</a></td>
             </tr>
             <tr>
               <td style="padding: 8px 0; color: #64748b; font-size: 14px;"><strong>Subject:</strong></td>
-              <td style="padding: 8px 0; color: #0f172a; font-size: 14px;">${trimmedSubject}</td>
+              <td style="padding: 8px 0; color: #0f172a; font-size: 14px;">${esc(trimmedSubject)}</td>
             </tr>
           </table>
           <div style="background: #f8fafc; border-left: 4px solid #38bdf8; padding: 16px; border-radius: 6px; margin-bottom: 20px;">
             <p style="margin: 0 0 6px 0; color: #64748b; font-size: 12px; text-transform: uppercase; font-weight: bold; letter-spacing: 0.5px;">Message Body:</p>
-            <p style="margin: 0; color: #0f172a; font-size: 14px; line-height: 1.6; white-space: pre-wrap;">${trimmedMessage}</p>
+            <p style="margin: 0; color: #0f172a; font-size: 14px; line-height: 1.6; white-space: pre-wrap;">${esc(trimmedMessage)}</p>
           </div>
           <div style="font-size: 12px; color: #94a3b8; text-align: center; border-top: 1px solid #f1f5f9; padding-top: 14px;">
             Received via Vercel Serverless Function
