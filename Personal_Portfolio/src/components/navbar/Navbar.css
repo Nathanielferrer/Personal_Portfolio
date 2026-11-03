@@ -1,0 +1,311 @@
+.navbar-sticky-header {
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  background-color: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 2px 14px rgba(0, 0, 0, 0.03);
+  transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.dark .navbar-sticky-header {
+  background-color: rgba(11, 15, 23, 0.92);
+  border-bottom-color: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+.navbar {
+  width: 100%;
+  max-width: 1650px;
+  margin: 0 auto;
+  padding: 0.85rem 5vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  box-sizing: border-box;
+}
+
+/* Left Brand Link */
+.navbar-brand {
+  font-family: 'ADLaM Display', cursive, sans-serif;
+  font-size: 1.65rem;
+  font-weight: 400;
+  color: #000000;
+  text-decoration: none;
+  letter-spacing: 0.5px;
+  transition: opacity 0.2s ease, color 0.3s ease;
+  flex-shrink: 0;
+}
+
+.dark .navbar-brand {
+  color: #ffffff;
+}
+
+.navbar-brand:hover {
+  opacity: 0.8;
+}
+
+/* Desktop Navigation (>= 961px) */
+.navbar-desktop-nav {
+  display: block;
+}
+
+.navbar-links {
+  display: flex;
+  align-items: center;
+  gap: 2.8rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar-link {
+  font-family: 'Advent Pro', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #334155;
+  text-decoration: none;
+  transition: color 0.2s ease, transform 0.2s ease;
+  display: inline-block;
+  position: relative;
+}
+
+.dark .navbar-link {
+  color: #94a3b8;
+}
+
+.navbar-link:hover {
+  color: #000000;
+  transform: translateY(-1px);
+}
+
+.dark .navbar-link:hover {
+  color: #ffffff;
+}
+
+/* Right Controls Container: Burger Menu (mobile/ipad) + Theme Toggle */
+.navbar-right-controls {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.navbar-theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* ==========================================================================
+   HAMBURGER BUTTON (Hidden on Desktop, Visible on Phone & iPad)
+   ========================================================================== */
+.navbar-burger-btn {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 40px;
+  height: 40px;
+  padding: 8px 9px;
+  background: rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 9px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+  box-sizing: border-box;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+  flex-shrink: 0;
+}
+
+.dark .navbar-burger-btn {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+.navbar-burger-btn:hover {
+  background: rgba(56, 189, 248, 0.12);
+  border-color: rgba(56, 189, 248, 0.35);
+}
+
+.burger-bar {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background-color: #0f172a;
+  border-radius: 9999px;
+  transform-origin: center;
+  will-change: transform, opacity;
+  transition: transform 0.22s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.18s ease, background-color 0.3s ease;
+}
+
+.dark .burger-bar {
+  background-color: #f8fafc;
+}
+
+/* Transform to 'X' icon when open */
+.navbar-burger-btn--open .burger-bar--1 {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.navbar-burger-btn--open .burger-bar--2 {
+  opacity: 0;
+  transform: scaleX(0);
+}
+
+.navbar-burger-btn--open .burger-bar--3 {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* ==========================================================================
+   RIGHT-TOP FLOATING DROPDOWN MENU
+   Placed at the top-right underneath the header bar
+   ========================================================================== */
+.navbar-dropdown-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 1.25rem;
+  width: 210px;
+  max-width: calc(100vw - 2rem);
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 14px;
+  box-shadow: 0 16px 38px -4px rgba(0, 0, 0, 0.16), 0 4px 12px rgba(0, 0, 0, 0.05);
+  padding: 0.45rem;
+  box-sizing: border-box;
+  z-index: 1001;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-8px) scale(0.96);
+  transform-origin: top right;
+  pointer-events: none;
+  transition: opacity 0.2s cubic-bezier(0.16, 1, 0.3, 1), transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.2s;
+}
+
+.dark .navbar-dropdown-menu {
+  background: rgba(15, 23, 42, 0.96);
+  border-color: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 20px 45px -4px rgba(0, 0, 0, 0.7), 0 4px 14px rgba(0, 0, 0, 0.35);
+}
+
+.navbar-dropdown-menu--open {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+.navbar-dropdown-links {
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 0.25rem;
+}
+
+.navbar-dropdown-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0.65rem 0.9rem;
+  border-radius: 10px;
+  font-family: 'Advent Pro', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: #0f172a;
+  text-decoration: none;
+  letter-spacing: 0.3px;
+  transition: background-color 0.15s ease, color 0.15s ease, transform 0.15s ease;
+}
+
+.dark .navbar-dropdown-link {
+  color: #f1f5f9;
+}
+
+.navbar-dropdown-link svg {
+  flex-shrink: 0;
+  color: #64748b;
+  transition: color 0.15s ease;
+}
+
+.dark .navbar-dropdown-link svg {
+  color: #94a3b8;
+}
+
+.navbar-dropdown-link:hover,
+.navbar-dropdown-link:active {
+  background: rgba(56, 189, 248, 0.12);
+  color: #0284c7;
+  transform: translateX(3px);
+}
+
+.navbar-dropdown-link:hover svg,
+.navbar-dropdown-link:active svg {
+  color: #0284c7;
+}
+
+.dark .navbar-dropdown-link:hover,
+.dark .navbar-dropdown-link:active {
+  background: rgba(56, 189, 248, 0.16);
+  color: #38bdf8;
+}
+
+.dark .navbar-dropdown-link:hover svg,
+.dark .navbar-dropdown-link:active svg {
+  color: #38bdf8;
+}
+
+/* ==========================================================================
+   RESPONSIVE BREAKPOINTS (Mobile & iPad / Tablet <= 960px)
+   ========================================================================== */
+@media (max-width: 960px) {
+  .navbar {
+    padding: 0.75rem 1.25rem;
+    flex-direction: row !important; /* Always horizontal row: brand left, controls right */
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .navbar-desktop-nav {
+    display: none; /* Hidden on iPad and phone in favor of clean burger dropdown */
+  }
+
+  .navbar-burger-btn {
+    display: flex;
+  }
+
+  .navbar-right-controls {
+    gap: 0.75rem;
+  }
+
+  .navbar-brand {
+    font-size: 1.45rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar {
+    padding: 0.65rem 1rem;
+  }
+
+  .navbar-dropdown-menu {
+    right: 1rem;
+  }
+
+  .navbar-brand {
+    font-size: 1.35rem;
+  }
+
+  .navbar-right-controls {
+    gap: 0.55rem;
+  }
+}

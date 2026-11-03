@@ -1,0 +1,137 @@
+/* Loading Screen Container */
+.loading-screen {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ffffff;
+  overflow: hidden;
+  opacity: 1;
+  transition: opacity 600ms cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: opacity;
+}
+
+/* Dark Mode Background */
+.loading-screen.dark {
+  background-color: #000000;
+}
+
+/* Smooth exit when loading completes */
+.loading-screen--fade-out {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Background Video Wrapper */
+.loading-screen__video-wrapper {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* The Background Video - natural character colors retained with 0 inverted filter */
+.loading-screen__video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transform: translateZ(0);
+  transition: opacity 800ms cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity;
+}
+
+/* Character appears smoothly before the loading screen vanishes */
+.loading-screen__video--visible {
+  opacity: 0.96;
+}
+
+/* Soft radiant scrim for optimal loader readability */
+.loading-screen__overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at center,
+    rgba(255, 255, 255, 0.25) 0%,
+    rgba(255, 255, 255, 0.65) 100%
+  );
+  pointer-events: none;
+}
+
+.loading-screen.dark .loading-screen__overlay {
+  background: radial-gradient(
+    circle at center,
+    rgba(0, 0, 0, 0.25) 0%,
+    rgba(0, 0, 0, 0.72) 100%
+  );
+}
+
+/* Centered Content Container */
+.loading-screen__content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  padding: 1rem;
+}
+
+/* Centered Brand Logo */
+.loading-screen__logo {
+  width: 175px;
+  max-width: 80vw;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 10px 24px rgba(0, 0, 0, 0.15));
+  user-select: none;
+  -webkit-user-drag: none;
+  animation: loadingLogoAppear 800ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.loading-screen.dark .loading-screen__logo {
+  filter: drop-shadow(0 10px 30px rgba(56, 189, 248, 0.3)) drop-shadow(0 4px 12px rgba(0, 0, 0, 0.8));
+}
+
+@keyframes loadingLogoAppear {
+  0% {
+    opacity: 0;
+    transform: scale(0.88) translateY(-6px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@media (max-width: 640px) {
+  .loading-screen__logo {
+    width: 135px;
+  }
+  .loading-screen__content {
+    gap: 1rem;
+  }
+}
+
+/* Container around LatticeLoader - shape background removed so only animation and text remain */
+.loading-screen__badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  box-shadow: none;
+  border: none;
+  padding: 0;
+}
+
+.loading-screen.dark .loading-screen__badge {
+  background: transparent;
+  box-shadow: none;
+  border: none;
+}

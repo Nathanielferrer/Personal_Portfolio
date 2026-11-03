@@ -1,0 +1,171 @@
+.tech-glow-wrapper {
+  width: 100%;
+  margin-top: 1.2rem;
+  box-sizing: border-box;
+}
+
+.tech-card-content {
+  padding: 1.4rem 1.8rem;
+  box-sizing: border-box;
+  width: 100%;
+  transition: color 0.3s ease;
+}
+
+.tech-card-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.85rem;
+}
+
+/* Light mode defaults */
+.tech-badge {
+  background: #000000;
+  color: #ffffff;
+  border: 1px solid #000000;
+  padding: 0.25rem 0.65rem;
+  border-radius: 8px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 1.05rem;
+  font-weight: 700;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  transition: all 0.3s ease;
+}
+
+.dark .tech-badge {
+  background: rgba(255, 255, 255, 0.12);
+  color: #38bdf8;
+  border-color: rgba(255, 255, 255, 0.18);
+}
+
+.tech-card-title {
+  font-family: 'ADLaM Display', cursive, sans-serif;
+  font-size: clamp(1.25rem, 1.5vw, 1.55rem);
+  font-weight: 400;
+  color: #000000;
+  letter-spacing: 0.5px;
+  margin: 0;
+  transition: color 0.3s ease;
+}
+
+.dark .tech-card-title {
+  color: #ffffff;
+}
+
+.tech-card-divider {
+  width: 100%;
+  height: 1.5px;
+  background-color: rgba(0, 0, 0, 0.08);
+  margin-bottom: 1.1rem;
+  transition: background-color 0.3s ease;
+}
+
+.dark .tech-card-divider {
+  background-color: rgba(255, 255, 255, 0.12);
+}
+
+.tech-group {
+  margin-bottom: 0.95rem;
+}
+
+.tech-group:last-child {
+  margin-bottom: 0;
+}
+
+.tech-group-label {
+  font-family: 'Advent Pro', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #64748b;
+  margin: 0 0 0.55rem 0;
+  transition: color 0.3s ease;
+}
+
+.dark .tech-group-label {
+  color: #94a3b8;
+}
+
+.tech-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+}
+
+.tech-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.35rem 0.85rem;
+  background: #f8fafc;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 10px;
+  font-family: 'Advent Pro', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #1e293b;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: default;
+  user-select: none;
+}
+
+.tech-pill:hover {
+  background: #ffffff;
+  border-color: #000000;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+}
+
+.dark .tech-pill {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #f1f5f9;
+}
+
+.dark .tech-pill:hover {
+  background: rgba(255, 255, 255, 0.14);
+  border-color: rgba(255, 255, 255, 0.35);
+  color: #ffffff;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+}
+
+.tech-logo {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  display: block;
+}
+
+.github-icon-path {
+  fill: #181717;
+  transition: fill 0.3s ease;
+}
+
+.dark .github-icon-path {
+  fill: #ffffff;
+}
+
+@media (max-width: 640px) {
+  .tech-card-content {
+    padding: 1.1rem 1.1rem;
+  }
+
+  .tech-pills {
+    gap: 0.45rem;
+  }
+
+  .tech-pill {
+    padding: 0.3rem 0.75rem;
+    font-size: 0.95rem;
+  }
+
+  .tech-logo {
+    width: 16px;
+    height: 16px;
+  }
+}

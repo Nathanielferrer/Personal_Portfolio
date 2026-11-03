@@ -1,0 +1,347 @@
+.hero-container {
+  width: 100%;
+  max-width: 1650px;
+  margin: 0 auto;
+  min-height: calc(100vh - 60px);
+  padding: 1.5rem 5vw 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  z-index: 10;
+  gap: 5vw;
+  box-sizing: border-box;
+}
+
+.hero-left {
+  flex: 1.2;
+  max-width: 720px;
+}
+
+.hero-greeting {
+  font-family: 'Advent Pro', sans-serif;
+  font-size: clamp(1.3rem, 1.6vw, 1.7rem);
+  font-weight: 500;
+  color: #475569;
+  margin-bottom: 0.8rem;
+  letter-spacing: 0.4px;
+}
+
+.hero-name-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.hero-name {
+  font-family: 'ADLaM Display', cursive, sans-serif;
+  font-size: clamp(3.8rem, 5.6vw, 6.4rem);
+  font-weight: 400;
+  color: #000000;
+  line-height: 1.05;
+  letter-spacing: 1.5px;
+  margin: 0;
+}
+
+.hero-name-row {
+  display: flex;
+  align-items: center;
+  gap: 1.6rem;
+  flex-wrap: wrap;
+}
+
+.hero-airplane {
+  width: clamp(90px, 7.5vw, 135px);
+  height: auto;
+  object-fit: contain;
+  user-select: none;
+  pointer-events: none;
+  animation: floatAirplane 3.5s ease-in-out infinite alternate;
+}
+
+@keyframes floatAirplane {
+  0% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  100% {
+    transform: translateY(-8px) rotate(2deg);
+  }
+}
+
+.hero-title {
+  font-family: 'ADLaM Display', cursive, sans-serif;
+  font-size: clamp(1.8rem, 2.3vw, 2.4rem);
+  font-weight: 400;
+  color: #000000;
+  margin-top: 1.8rem;
+  margin-bottom: 1.2rem;
+  letter-spacing: 0.5px;
+  min-height: 1.35em;
+  display: inline-flex;
+  align-items: baseline;
+}
+
+.hero-description {
+  font-family: 'Advent Pro', sans-serif;
+  font-size: clamp(1.2rem, 1.4vw, 1.45rem);
+  font-weight: 500;
+  line-height: 1.7;
+  color: #334155;
+  margin-bottom: 2.2rem;
+  max-width: 580px;
+  letter-spacing: 0.2px;
+}
+
+.hero-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  align-items: flex-start;
+  margin-top: 0.5rem;
+}
+
+.hero-buttons-row,
+.hero-pills-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+  align-items: center;
+}
+
+.hero-pill {
+  font-family: 'Advent Pro', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 600;
+  background-color: #1e1e24;
+  color: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 9999px;
+  padding: 0.65rem 2rem;
+  cursor: default;
+  user-select: none;
+  pointer-events: none; /* decorative text with pill shape, not a button */
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.12);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  letter-spacing: 0.5px;
+}
+
+.hero-right {
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Front Face Image */
+.hero-flip-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: bottom center;
+  display: block;
+}
+
+/* Back Face Content */
+.hero-flip-back {
+  width: 100%;
+  height: 100%;
+  padding: 2.4rem 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-color: #ffffff;
+  color: #0f172a;
+  border: 1.5px solid rgba(0, 0, 0, 0.1);
+  border-radius: 36px;
+  box-sizing: border-box;
+}
+
+.hero-flip-back-title {
+  font-family: 'ADLaM Display', cursive, sans-serif;
+  font-size: 1.85rem;
+  font-weight: 400;
+  margin: 0 0 0.3rem;
+  color: #000000;
+}
+
+.hero-flip-back-role {
+  font-family: 'Advent Pro', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #475569;
+  margin: 0 0 1rem;
+}
+
+.hero-flip-back-divider {
+  width: 50px;
+  height: 3px;
+  background-color: #579fe6;
+  border-radius: 9999px;
+  margin-bottom: 1.2rem;
+}
+
+.hero-flip-back-text {
+  font-family: 'Advent Pro', sans-serif;
+  font-size: 1.15rem;
+  line-height: 1.6;
+  color: #334155;
+  margin-bottom: 1.4rem;
+}
+
+.hero-flip-back-tags {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.hero-flip-tag {
+  font-family: 'Advent Pro', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  background-color: #f1f5f9;
+  color: #0f172a;
+  padding: 0.35rem 0.85rem;
+  border-radius: 9999px;
+  border: 1px solid #e2e8f0;
+}
+
+.hero-flip-back-hint {
+  font-family: 'Advent Pro', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #94a3b8;
+  margin-top: auto;
+  letter-spacing: 0.3px;
+}
+
+@media (max-width: 1024px) {
+  .hero-container {
+    flex-direction: column-reverse;
+    text-align: center;
+    padding: 2rem 1.5rem 3rem;
+    gap: 3rem;
+  }
+
+  .hero-left {
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* Full name horizontal on iPad / Tablet so surname is not on a new line */
+  .hero-name-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 0.85rem;
+    flex-wrap: wrap;
+  }
+
+  .hero-name {
+    font-size: clamp(2.3rem, 4.6vw, 3.6rem);
+    white-space: nowrap;
+    line-height: 1.1;
+  }
+
+  .hero-name-row {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.85rem;
+    flex-wrap: nowrap;
+  }
+
+  .hero-airplane {
+    width: clamp(48px, 5.5vw, 75px);
+  }
+
+  .hero-actions {
+    align-items: center;
+  }
+
+  .hero-buttons-row,
+  .hero-pills-row {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 540px) {
+  .hero-container {
+    padding: 1.5rem 1rem 2.5rem;
+    gap: 2.2rem;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  .hero-left {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .hero-name-container {
+    gap: 0.45rem;
+    max-width: 100%;
+  }
+
+  .hero-name {
+    font-size: clamp(1.6rem, 7.5vw, 2.3rem);
+    white-space: normal;
+    word-break: break-word;
+  }
+
+  .hero-name-row {
+    gap: 0.45rem;
+  }
+
+  .hero-airplane {
+    width: 32px;
+    height: 32px;
+  }
+
+  .hero-description {
+    font-size: 0.98rem;
+    padding: 0 0.25rem;
+    word-break: break-word;
+    overflow-wrap: break-word;
+  }
+
+  .hero-pills-row {
+    gap: 0.6rem;
+  }
+
+  .hero-pill {
+    font-size: 0.95rem;
+    padding: 0.45rem 1.1rem;
+  }
+}
+
+/* Dark mode styles */
+.dark .hero-greeting {
+  color: #94a3b8;
+}
+
+.dark .hero-name {
+  color: #ffffff;
+}
+
+.dark .hero-title {
+  color: #ffffff;
+}
+
+.dark .hero-description {
+  color: #cbd5e1;
+}
+
+.dark .hero-pill {
+  background-color: rgba(255, 255, 255, 0.08);
+  color: #f8fafc;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+}

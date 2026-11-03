@@ -1,0 +1,54 @@
+# ==============================================================================
+# SECRETS & CREDENTIALS (NEVER COMMIT TO PUBLIC REPOSITORY)
+# ==============================================================================
+config.php
+**/config.php
+api/config.php
+*.env
+*.env.*
+*.env.local
+*.env.*.local
+
+# ==============================================================================
+# DEPENDENCIES (Install via npm install on server)
+# ==============================================================================
+node_modules/
+Personal_Portfolio/node_modules/
+*/node_modules/
+
+# ==============================================================================
+# BUILD OUTPUTS (Generate via npm run build on server)
+# ==============================================================================
+Personal_Portfolio/dist/
+Personal_Portfolio/dist-ssr/
+dist/
+dist-ssr/
+
+# ==============================================================================
+# LOGS & TEMPORARY RUNTIME FILES
+# ==============================================================================
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# ==============================================================================
+# OPERATING SYSTEM & IDE METADATA
+# ==============================================================================
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/*
+!.vscode/extensions.json
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Antigravity / Agent runtime artifacts
+.gemini/
+

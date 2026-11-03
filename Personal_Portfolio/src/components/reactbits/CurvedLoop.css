@@ -1,0 +1,42 @@
+.curved-loop-divider {
+  width: 100%;
+  position: relative;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+  margin: 1.2rem 0 1.6rem;
+  background: transparent;
+}
+
+.curved-loop-jacket {
+  width: 100%;
+  min-height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background: transparent;
+  color: #000000;
+  transition: color 0.3s ease;
+  overflow: visible;
+}
+
+.dark .curved-loop-jacket {
+  color: #ffffff;
+}
+
+.curved-loop-svg {
+  width: 100%;
+  height: clamp(68px, 6.5vw, 105px);
+  overflow: visible;
+  display: block;
+  fill: currentColor;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+  text-transform: uppercase;
+  line-height: 1;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
